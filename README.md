@@ -8,10 +8,11 @@ remover, modificar tarefas, com autenticação.
 ### TODO
 
  - [ ] Gestão de Utilizadores
- - [ ] Login
+ - [x] Login
     - [X] Form de Login
+    - [ ] Cookies
  - [ ] Falar sobre o gitignore para os ficheiros de dados
- - [ ] Logout
+ - [X] Logout
  - [ ] Página Home
  - [ ] Criar Tarefas
  - [ ] Listar Tarefas
