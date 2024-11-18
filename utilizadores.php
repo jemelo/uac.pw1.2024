@@ -32,11 +32,27 @@
                     <tr>
                         <th>Nome</th>
                         <th>Username</th>
-                        <th>Ações</th>
+                        <th class="text-end">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php
+                        $utilizadores = lerUtilizadores();
+                        foreach ($utilizadores as $utilizador) { ?>
+                            <tr>
+                                <td><?php echo $utilizador[2];?></td>
+                                <td><?php echo $utilizador[0];?></td>
+                                <td class="text-end">
+                                    <a href="ver_utilizador.php?username=<?php echo $utilizador[0];?>" class="btn btn-secondary">
+                                        <i class="fa-solid fa-info fa-fw"></i>
+                                    </a>
+                                    <a href="modificar_utilizador.php?username=<?php echo $utilizador[0];?>" class="btn btn-warning">
+                                        <i class="fa-solid fa-user-pen fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php }
+                    ?>
                 </tbody>
             </table>
         </div>
