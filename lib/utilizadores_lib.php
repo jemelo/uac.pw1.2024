@@ -71,3 +71,26 @@ function terminaSessao(): bool
     session_destroy();
     return true;
 }
+
+function adicionarUtilizador(string $username, string $nome, string $password): array|bool
+{
+    $futilizadores = fopen(
+        "data"
+            . DIRECTORY_SEPARATOR
+            . "utilizadores.txt",
+        'a'
+    );
+
+    $resultado = fputs($futilizadores, $username . ',' . password_hash($password, PASSWORD_DEFAULT) . ',' . $nome . "\n");
+    fclose($futilizadores);
+    
+    if ($resultado === false) {
+        return false;
+    }
+
+    return [
+        $username,
+        password_hash($password, PASSWORD_DEFAULT),
+        $nome
+    ];
+}
