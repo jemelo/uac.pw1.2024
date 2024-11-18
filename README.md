@@ -10,10 +10,10 @@ remover, modificar tarefas, com autenticação.
  - [ ] Gestão de Utilizadores
  - [x] Login
     - [X] Form de Login
-    - [ ] Cookies
- - [ ] Falar sobre o gitignore para os ficheiros de dados
+    - [X] Cookies
+ - [X] Falar sobre o gitignore para os ficheiros de dados
  - [X] Logout
- - [ ] Página Home
+ - [X] Página Home
  - [ ] Criar Tarefas
  - [ ] Listar Tarefas
  - [ ] Ver Tarefas
