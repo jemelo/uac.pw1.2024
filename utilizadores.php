@@ -24,6 +24,23 @@
             </a>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Username</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <?php include_once 'partials' . DIRECTORY_SEPARATOR . 'footer.php'; ?>

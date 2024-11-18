@@ -1,6 +1,6 @@
 <?php
 
-function validaUtilizador(string $username, string $password): array|bool
+function lerUtilizadores(): array
 {
     // abrir o ficheiro no directorio superior data/utilizadores
     $futilizadores = fopen(
@@ -9,9 +9,22 @@ function validaUtilizador(string $username, string $password): array|bool
             . "utilizadores.txt",
         "r"
     );
-    while(($linha = fgets($futilizadores)) !== false) {
-        $utilizador = explode(",", $linha);
 
+    $utilizadores = [];
+    while(($linha = fgets($futilizadores)) !== false) {
+        $utilizadores[] = explode(",", $linha);
+    }
+
+    return $utilizadores;
+}
+
+
+function validaUtilizador(string $username, string $password): array|bool
+{
+    // abrir o ficheiro no directorio superior data/utilizadores
+    $utilizadores = lerUtilizadores();
+    
+    foreach ($utilizadores as $utilizador) {
         if ($username == $utilizador[0]) {
             if (password_verify($password, $utilizador[1])) {
                 @session_start();
