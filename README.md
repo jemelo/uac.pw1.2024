@@ -7,7 +7,10 @@ remover, modificar tarefas, com autenticação.
 
 ### TODO
 
- - [ ] Gestão de Utilizadores
+ - [ ] Gestão de Utilizadores (CRUD)
+    - [ ] Listar
+    - [ ] Adicionar
+    - [ ] Modificar
  - [x] Login
     - [X] Form de Login
     - [X] Cookies
