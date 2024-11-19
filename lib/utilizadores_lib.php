@@ -78,13 +78,22 @@ function terminaSessao(): bool
     return true;
 }
 
-function adicionarUtilizador(string $username, string $nome, string $password): array|bool
+function obtemUtilizador(string $username): array|bool
 {
     $utilizadores = lerUtilizadores();
     foreach ($utilizadores as $utilizador) {
         if ($utilizador['username'] == $username) {
-            return false;
+            return $utilizador;
         }
+    }
+
+    return false;
+}
+
+function adicionarUtilizador(string $username, string $nome, string $password): array|bool
+{
+    if (obtemUtilizador($username) === false) {
+        return false;
     }
 
     $futilizadores = fopen(
