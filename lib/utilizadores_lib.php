@@ -12,7 +12,13 @@ function lerUtilizadores(): array
 
     $utilizadores = [];
     while(($linha = fgets($futilizadores)) !== false) {
-        $utilizadores[] = explode(",", $linha);
+        $tempUtilizador = explode(",", $linha);
+
+        $utilizadores[] = [
+            'nome' => $tempUtilizador[2],
+            'username' => $tempUtilizador[0],
+            'password' => $tempUtilizador[1],
+        ];
     }
 
     return $utilizadores;
@@ -25,10 +31,10 @@ function validaUtilizador(string $username, string $password): array|bool
     $utilizadores = lerUtilizadores();
     
     foreach ($utilizadores as $utilizador) {
-        if ($username == $utilizador[0]) {
-            if (password_verify($password, $utilizador[1])) {
+        if ($username == $utilizador['username']) {
+            if (password_verify($password, $utilizador['password'])) {
                 @session_start();
-                $_SESSION['nome'] = $utilizador[2];
+                $_SESSION['nome'] = $utilizador['nome'];
                 setcookie('tarefaslogin', json_encode([
                     'utilizador' => $username,
                     'password' => $password,
@@ -74,6 +80,9 @@ function terminaSessao(): bool
 
 function adicionarUtilizador(string $username, string $nome, string $password): array|bool
 {
+    
+
+
     $futilizadores = fopen(
         "data"
             . DIRECTORY_SEPARATOR
