@@ -11,7 +11,7 @@ remover, modificar tarefas, com autenticação.
     - [X] Listar
     - [X] Adicionar
     - [ ] Modificar
-    - [ ] Ver
+    - [X] Ver
  - [x] Login
     - [X] Form de Login
     - [X] Cookies
