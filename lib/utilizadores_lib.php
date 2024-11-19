@@ -80,8 +80,12 @@ function terminaSessao(): bool
 
 function adicionarUtilizador(string $username, string $nome, string $password): array|bool
 {
-    
-
+    $utilizadores = lerUtilizadores();
+    foreach ($utilizadores as $utilizador) {
+        if ($utilizador['username'] == $username) {
+            return false;
+        }
+    }
 
     $futilizadores = fopen(
         "data"
