@@ -93,7 +93,7 @@ function obtemUtilizador(string $username): array|bool
 
 function adicionarUtilizador(string $username, string $nome, string $password): array|bool
 {
-    if (obtemUtilizador($username) === false) {
+    if (obtemUtilizador($username) !== false) {
         return false;
     }
 
