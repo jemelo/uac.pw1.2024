@@ -36,6 +36,7 @@ function validaUtilizador(string $username, string $password): array|bool
             if (password_verify($password, $utilizador['password'])) {
                 @session_start();
                 $_SESSION['nome'] = $utilizador['nome'];
+                $_SESSION['username'] = $utilizador['username'];
                 setcookie('tarefaslogin', json_encode([
                     'utilizador' => $username,
                     'password' => $password,
