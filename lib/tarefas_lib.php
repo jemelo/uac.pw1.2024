@@ -44,6 +44,29 @@ function obtemProximoId(): int
     return $tarefas[count($tarefas)-1]['id'] + 1;
 }
 
+function sanitizar(string $string, bool $reverter = false): string
+{
+    if (!$reverter) {
+        $substituicoes = [
+            "\n" => '<NEWLINEN>',
+            "\r" => '<NEWLINER>',
+            "<SEP>" => '!!SEP!!'
+        ];
+    } else {
+        $substituicoes = [
+            '<NEWLINEN>' => "\n",
+            '<NEWLINER>' => "\r",
+            '!!SEP!!' => "<SEP>"
+        ];
+    }
+    
+    foreach ($substituicoes as $search => $replace) {
+    	$string = str_replace($search, $replace, $string);
+    }
+
+    return $string;
+}
+
 function adicionarTarefa(string $nome, string $descricao, string $utilizador): array|bool
 {
     $id = obtemProximoId();
@@ -57,8 +80,8 @@ function adicionarTarefa(string $nome, string $descricao, string $utilizador): a
 
     $tarefa = [
         $id,
-        $nome,
-        $descricao,
+        sanitizar($nome),
+        sanitizar($descricao),
         1,
         $utilizador,
         date('Y-m-d H:is'),

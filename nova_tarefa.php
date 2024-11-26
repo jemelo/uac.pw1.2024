@@ -8,15 +8,14 @@
     }
 
     if (!empty($_POST)) {
-        $tarefa = adicionarTarefa($_POST['name'], $_POST['descricao'], $_SESSION['username']);
-        // $ret = adicionarUtilizador($_POST['username'], $_POST['name'], $_POST['password']);
-        // if ($ret === false) {
-        //     $message = 'Não foi possivel adicionar o utilizador';
-        //     $class = "danger";
-        // } else {
-        //     $message = "Utilizador adicionado com sucesso";
-        //     $class = "success";
-        // }
+        $tarefa = adicionarTarefa($_POST['name'], $_POST['descricao'], $_SESSION['username']);        
+        if ($tarefa === false) {
+            $message = 'Não foi possivel adicionar a tarefa';
+            $class = "danger";
+        } else {
+            $message = "Tarefa adicionada com sucesso";
+            $class = "success";
+        }
     }
 ?>
 

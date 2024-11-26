@@ -26,28 +26,34 @@
         </div>
     </div>
 
-    <!-- <div class="row">
+    <div class="row">
         <div class="col">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Username</th>
-                        <th class="text-end">Ações</th>
+                        <th>Estado</th>
+                        <th>Utilizador</th>
+                        <th>Criação</th>
+                        <th>Execução</th>
+                        <th class="text-end">Acções</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        $utilizadores = lerUtilizadores();
-                        foreach ($utilizadores as $utilizador) { ?>
+                        $tarefas = lerTarefas();
+                        foreach ($tarefas as $tarefa) { ?>
                             <tr>
-                                <td><?php echo $utilizador['nome'];?></td>
-                                <td><?php echo $utilizador['username'];?></td>
+                                <td><?php echo $tarefa['nome'];?></td>
+                                <td><?php echo $tarefa['estado'];?></td>
+                                <td><?php echo $tarefa['utilizador'];?></td>
+                                <td><?php echo $tarefa['data_criacao'];?></td>
+                                <td><?php echo $tarefa['data_execucao'];?></td>
                                 <td class="text-end">
-                                    <a href="ver_utilizador.php?username=<?php echo $utilizador['username'];?>" class="btn btn-secondary">
+                                    <a href="ver_tarefa.php?id=<?php echo $tarefa['id'];?>" class="btn btn-secondary">
                                         <i class="fa-solid fa-info fa-fw"></i>
                                     </a>
-                                    <a href="modificar_utilizador.php?username=<?php echo $utilizador['username'];?>" class="btn btn-warning">
+                                    <a href="modificar_tarefa.php?id=<?php echo $tarefa['id'];?>" class="btn btn-warning">
                                         <i class="fa-solid fa-user-pen fa-fw"></i>
                                     </a>
                                 </td>
@@ -57,7 +63,7 @@
                 </tbody>
             </table>
         </div>
-    </div> -->
+    </div>
 </div>
 
 <?php include_once 'partials' . DIRECTORY_SEPARATOR . 'footer.php'; ?>
