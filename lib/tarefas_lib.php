@@ -1,6 +1,6 @@
 <?php
 
-function lerTarefas(): array
+function lerTarefas(string $pesquisa = '', string $estado = ''): array
 {
     if (!file_exists( "data" . DIRECTORY_SEPARATOR . "tarefas.txt")) {
         return [];
@@ -18,7 +18,7 @@ function lerTarefas(): array
     while(($linha = fgets($ftarefas)) !== false) {
         $tempTarefa = explode("<SEP>", $linha);
 
-        $tarefas[] = [
+        $tarefa = [
             'id' => trim($tempTarefa[0]),
             'nome' => trim($tempTarefa[1]),
             'descricao' => trim($tempTarefa[2]),
@@ -27,6 +27,16 @@ function lerTarefas(): array
             'data_criacao' => trim($tempTarefa[5]),
             'data_execucao' => trim($tempTarefa[6]),
         ];
+
+        if (!empty($pesquisa) && (strpos($tarefa['nome'], $pesquisa) === false)) {
+            continue;
+        }
+
+        if (!empty($estado) && $tarefa['estado'] != $estado) {
+            continue;
+        }
+
+        $tarefas[] = $tarefa;
     }
 
     fclose($ftarefas);

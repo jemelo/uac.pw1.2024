@@ -18,6 +18,29 @@
         </div>
     </div>
 
+    <form action="tarefas.php" method="post" class="mt-3 mb-3">
+        <div class="row">
+            <div class="col-8">
+                <input type="text" name="pesquisa" id="" class="form-control" placeholder="Filtrar resultados">                
+            </div>
+            <div class="col-2">
+                <select name="estado" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="1">Submetida</option>
+                    <option value="2">Em Execução</option>
+                    <option value="3">Concluída</option>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <input type="submit" value="Filtrar" name="search_b" class="btn btn-secondary col-12">
+            </div>
+        </div>
+        
+    </form>
+
+    <hr>
+
     <div class="row">
         <div class="col text-end">
             <a href="nova_tarefa.php" class="btn btn-primary">
@@ -41,7 +64,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        $tarefas = lerTarefas();
+                        $tarefas = lerTarefas($_POST['pesquisa'] ?? '', $_POST['estado'] ?? '');
                         foreach ($tarefas as $tarefa) { ?>
                             <tr>
                                 <td><?php echo $tarefa['nome'];?></td>
