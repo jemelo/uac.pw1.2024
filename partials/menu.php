@@ -16,9 +16,18 @@
           <a class="nav-link" href="tarefas.php">Tarefas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="logout.php">Terminar Sessão</a>
+          <a class="nav-link" href="#" onclick="confirmarSaida();">Terminar Sessão</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<script>
+  function confirmarSaida()
+  {
+    if (confirm('Tem a certeza que deseja sair?')) {
+      window.location.href = 'logout.php';
+    }
+  }
+</script>
