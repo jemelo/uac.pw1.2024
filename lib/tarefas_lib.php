@@ -119,3 +119,58 @@ function obtemTarefa(int $id): array|bool
 
     return false;
 }
+
+function modificarTarefa(int $id, string $nome, string $descricao, string $data_execucao): bool
+{
+    if (empty($nome)) {
+        throw new Exception('Nome não pode ser vazio');
+    }
+
+    if (strlen($nome) > 100) {
+        throw new Exception('Nome não pode ser maior que 100 caracteres');
+    }
+
+    
+
+    $tarefas = lerTarefas();
+    foreach ($tarefas as $pos => $tarefa) {
+        if ($tarefa['id'] == $id) {
+            $tarefas[$pos]['nome'] = $nome;
+            $tarefas[$pos]['descricao'] = $descricao;
+            $tarefas[$pos]['data_execucao'] = $data_execucao;
+
+            escreverTarefas($tarefas);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function escreverTarefas(array $tarefas): bool
+{
+    // abrir o ficheiro no directorio superior data/utilizadores
+    $ftarefas = fopen(
+            "data"
+            . DIRECTORY_SEPARATOR
+            . "tarefas.txt",
+        "w"
+    );
+
+    foreach($tarefas as $tarefa) {
+        $tmpTarefa = [
+            $tarefa['id'],
+            sanitizar($tarefa['nome']),
+            sanitizar($tarefa['descricao']),
+            1,
+            $tarefa['utilizador'],
+            $tarefa['data_criacao'],
+            $tarefa['data_execucao']
+        ];
+
+        fputs($ftarefas, implode('<SEP>', $tmpTarefa) . "\n");
+    }
+
+    fclose($ftarefas);
+    return true;
+}

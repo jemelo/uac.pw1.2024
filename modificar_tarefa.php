@@ -17,8 +17,17 @@
             $class = "danger";
         } else {
             if (!empty($_POST)) {
-                echo "processar o formulário";
-                exit;
+                try {
+                    modificarTarefa($_GET['id'], $_POST['name'], $_POST['descricao'], $_POST['data_execucao']);
+                    $message = "Tarefa modificada com sucesso";
+                    $class = "success";
+                    $tarefa = obtemTarefa($_GET['id']);
+                } catch (Exception $e) {
+                    $message = $e->getMessage();
+                    $class = "danger";
+
+                }
+                
             }
         }
     }
@@ -67,7 +76,7 @@
             <div class="col-4">
                 <input 
                     class="form-control" 
-                    type="datetime-local" 
+                    type="text" 
                     name="data_execucao" 
                     value="<?php echo $tarefa['data_execucao'];?>"
                 >
