@@ -20,8 +20,8 @@ function lerTarefas(string $pesquisa = '', string $estado = ''): array
 
         $tarefa = [
             'id' => trim($tempTarefa[0]),
-            'nome' => trim($tempTarefa[1]),
-            'descricao' => trim($tempTarefa[2]),
+            'nome' => sanitizar(trim($tempTarefa[1]), true),
+            'descricao' => sanitizar(trim($tempTarefa[2]), true),
             'estado' => trim($tempTarefa[3]),
             'utilizador' => trim($tempTarefa[4]),
             'data_criacao' => trim($tempTarefa[5]),
@@ -106,4 +106,16 @@ function adicionarTarefa(string $nome, string $descricao, string $utilizador): a
     }
 
     return $tarefa;
+}
+
+function obtemTarefa(int $id): array|bool
+{
+    $tarefas = lerTarefas();
+    foreach ($tarefas as $tarefa) {
+        if ($tarefa['id'] == $id) {
+            return $tarefa;
+        }
+    }
+
+    return false;
 }

@@ -7,25 +7,30 @@
         exit;
     }
 
-    if (!empty($_POST)) {
-        $tarefa = adicionarTarefa($_POST['name'], $_POST['descricao'], $_SESSION['username']);        
+    if (empty($_GET['id'])) {
+        $message = 'É obrigatório indicar a tarefa.';
+        $class = "danger";
+    } else {
+        $tarefa = obtemTarefa($_GET['id']);
         if ($tarefa === false) {
-            $message = 'Não foi possivel adicionar a tarefa';
+            $message = 'A tarefa indicada não foi encontrada';
             $class = "danger";
         } else {
-            $message = "Tarefa adicionada com sucesso";
-            $class = "success";
+            if (!empty($_POST)) {
+                echo "processar o formulário";
+                exit;
+            }
         }
     }
 ?>
-
-<?php include_once 'partials' . DIRECTORY_SEPARATOR . 'header.php'; ?>
+  
+  <?php include_once 'partials' . DIRECTORY_SEPARATOR . 'header.php'; ?>
 <?php include_once 'partials' . DIRECTORY_SEPARATOR . 'menu.php'; ?>
 
 <div class="container mt-3">
     <div class="row">
         <div class="col">
-            <h1>Adicionar Tarefa</h1>
+            <h1>Modificar Tarefa</h1>
         </div>
     </div>
 
@@ -37,22 +42,38 @@
         </div>
     <?php } ?>
 
-    <form action="nova_tarefa.php" method="post" class="">
+    <form action="modificar_tarefa.php?id=<?php echo $_GET['id']; ?>" method="post" class="">
         <div class="row justify-content-center mt-3">
             <label for="" class="col-2 text-end fw-bold">Nome</label>
             <div class="col-4">
-                <input class="form-control" type="text" name="name" id="">
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name="name" 
+                    value="<?php echo $tarefa['nome'];?>"
+                >
             </div>
         </div>
 
         <div class="row justify-content-center mt-3">
             <label for="" class="col-2 text-end fw-bold">Descrição</label>
             <div class="col-4">
-                <textarea class="form-control" name="descricao" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="descricao" id="" cols="30" rows="10"><?php echo $tarefa['descricao'];?></textarea>
             </div>
         </div>
 
-        
+        <div class="row justify-content-center mt-3">
+            <label for="" class="col-2 text-end fw-bold">Data Execução</label>
+            <div class="col-4">
+                <input 
+                    class="form-control" 
+                    type="datetime-local" 
+                    name="data_execucao" 
+                    value="<?php echo $tarefa['data_execucao'];?>"
+                >
+            </div>
+        </div>
+
         <div class="row justify-content-center mt-3">
             <div class="col text-center">
                 <input  class="btn btn-success btn-large" type="submit" value="Guardar" name="form_b">
